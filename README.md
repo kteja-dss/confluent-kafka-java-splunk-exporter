@@ -1,4 +1,4 @@
-#Note this code primarily showcases a template of exporting data to Splunk from Confluent kafka topics. Please feel free to modify based on your requirements.
+#Note this code primarily showcases a template of exporting data to Splunk from Confluent kafka topics, however, it's recommended to use the Connector on Confluent Cloud unless there's a special requirement like having clusters on the private vpcs. Please feel free to modify based on your requirements. 
 
 #Instructions to start this application
 
