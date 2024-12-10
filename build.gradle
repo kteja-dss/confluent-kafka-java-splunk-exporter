@@ -1,0 +1,49 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0"
+    }
+}
+
+plugins {
+    id "java"
+    id "idea"
+    id "eclipse"
+}
+
+sourceCompatibility = "11"
+targetCompatibility = "11"
+version = "0.0.1"
+
+repositories {
+    mavenCentral()
+
+    maven {
+        url "https://packages.confluent.io/maven"
+    }
+}
+
+apply plugin: "com.github.johnrengelman.shadow"
+
+dependencies {
+    implementation 'org.slf4j:slf4j-nop:2.0.3'
+    implementation 'org.apache.kafka:kafka-clients:3.3.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+}
+
+shadowJar {
+    archiveBaseName = "confluent-kafka-java-splunk-exporter"
+    archiveClassifier = ''
+    archiveVersion = version
+    mergeServiceFiles() // This is optional but useful if you have service files that need to be merged
+}
+
+jar {
+    manifest {
+        attributes(
+                "Main-Class": "io.confluent.developer.ConsumerAuditlogExporter"
+        )
+    }
+}
